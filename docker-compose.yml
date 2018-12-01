@@ -1,0 +1,18 @@
+version: '3'
+services:
+  email-service:
+    build: email-service
+    environment:
+      DEBUG: "email-service:*"
+      MONGODB_URL: mongodb://mongo:27017
+      MONGODB_DATABASE: EmailServiceDEV
+      LOGGER_LEVEL: trace
+    restart: always
+  nginx:
+    build: front-end
+    ports:
+      - "8888:80"
+    restart: always
+  mongo:
+    image: "mongo:latest"
+    restart: always
